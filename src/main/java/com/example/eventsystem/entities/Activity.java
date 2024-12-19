@@ -2,7 +2,9 @@ package com.example.eventsystem.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "tb_activity")
 public class Activity {
@@ -16,6 +18,12 @@ public class Activity {
     private String description;
 
     private Double price;
+
+    @ManyToMany(mappedBy = "activities", cascade = CascadeType.ALL)
+    private Set<Block> blocks = new HashSet<>();
+
+    @OneToMany
+    private Set<Category> categories = new HashSet<>();
 
     public Activity() {}
 
@@ -51,6 +59,22 @@ public class Activity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Block> getBlocks() {
+        return blocks;
+    }
+
+    public void setBlocks(Set<Block> blocks) {
+        this.blocks = blocks;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     @Override

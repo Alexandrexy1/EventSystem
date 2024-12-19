@@ -3,7 +3,9 @@ package com.example.eventsystem.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "tb_block")
 public class Block {
@@ -14,8 +16,11 @@ public class Block {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant start;
 
-    @Column(columnDefinition = "TIMEZONE WITHOUT TIME  ZONE")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant ending;
+
+    @ManyToMany
+    private Set<Activity> activities = new HashSet<>();
 
     public Block(Instant start, Instant ending) {
         this.start = start;
@@ -40,6 +45,14 @@ public class Block {
 
     public void setEnding(Instant ending) {
         this.ending = ending;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override
