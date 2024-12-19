@@ -20,8 +20,9 @@ public class Category {
 
     public Category() {}
 
-    public Category(String description) {
+    public Category(String description, Set<Activity> activities) {
         this.description = description;
+        this.activities = activities;
     }
 
     public Long getId() {

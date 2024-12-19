@@ -23,17 +23,22 @@ public class Activity {
     private Set<Block> blocks = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToMany
+    @JoinTable(name = "tb_activity_participant",
+               joinColumns = @JoinColumn(name = "activity_id"),
+               inverseJoinColumns = @JoinColumn(name = "participant_id"))
     private Set<Participant> participants = new HashSet<>();
 
     public Activity() {}
 
-    public Activity(String name, String description, Double price) {
+    public Activity(String name, String description, Double price, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
     }
 
     public Long getId() {

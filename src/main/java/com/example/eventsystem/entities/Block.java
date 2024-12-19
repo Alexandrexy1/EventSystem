@@ -20,6 +20,9 @@ public class Block {
     private Instant ending;
 
     @ManyToMany
+    @JoinTable(name = "tb_block_activity",
+               joinColumns = @JoinColumn(name = "block_id"),
+               inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private Set<Activity> activities = new HashSet<>();
 
     public Block(Instant start, Instant ending) {
