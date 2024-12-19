@@ -22,8 +22,11 @@ public class Activity {
     @ManyToMany(mappedBy = "activities", cascade = CascadeType.ALL)
     private Set<Block> blocks = new HashSet<>();
 
-    @OneToMany
-    private Set<Category> categories = new HashSet<>();
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany
+    private Set<Participant> participants = new HashSet<>();
 
     public Activity() {}
 
@@ -69,12 +72,20 @@ public class Activity {
         this.blocks = blocks;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<Participant> participants) {
+        this.participants = participants;
     }
 
     @Override

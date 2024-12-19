@@ -1,9 +1,10 @@
 package com.example.eventsystem.entities;
 
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "tb_category")
 public class Category {
@@ -13,6 +14,9 @@ public class Category {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<Activity> activities = new HashSet<>();
 
     public Category() {}
 
@@ -30,6 +34,14 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override

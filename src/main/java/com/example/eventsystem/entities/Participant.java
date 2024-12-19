@@ -2,7 +2,9 @@ package com.example.eventsystem.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "tb_participant")
 public class Participant {
@@ -14,6 +16,9 @@ public class Participant {
 
     @Column(unique = true)
     private String email;
+
+    @ManyToMany(mappedBy = "participants")
+    private Set<Activity> activities = new HashSet<>();
 
     public Participant() {}
 
@@ -40,6 +45,14 @@ public class Participant {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override
